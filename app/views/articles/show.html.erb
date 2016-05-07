@@ -4,13 +4,16 @@
           <%=link_to tag.name, tag_path(tag)%>
         <%end%>
 </p>
+<%= image_tag @article.image.url(:medium) %>
 <p>
   <%=@article.body%>
 </p>
 <%= link_to "<< Back to Articles List", articles_path%><br>
-<%=render 'comments/form'%>
-<%= link_to "Delete", article_path(@article),method: :delete,data:{confirm: "Are you sure to delete this article?"}%>
-<%= link_to "Edit",edit_article_path(@article)%>
+<%if logged_in?%>
+  <%=render 'comments/form'%>
+  <%= link_to "Delete", article_path(@article),method: :delete,data:{confirm: "Are you sure to delete this article?"}%>
+  <%= link_to "Edit",edit_article_path(@article)%>
+<%end%>
 <br>
 <h3>Comments</h3>
 <%=render 'articles/comment'%>
